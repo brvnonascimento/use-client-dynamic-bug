@@ -1,16 +1,24 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { Suspense } from "react";
+import styles from "./page.module.css";
+
+const ClientTest = dynamic(() => import("./ClientTest"));
 
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Suspense fallback={<h1>Loading Client test!</h1>}>
+        <ClientTest />
+      </Suspense>
+
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js 13!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>app/page.tsx</code>
         </p>
 
@@ -46,12 +54,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
